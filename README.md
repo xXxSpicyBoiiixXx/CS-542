@@ -1,6 +1,6 @@
 # CS-542
 ## Networks I
-## Fall 2020 Dr. Choi
+## Fall 2020 Dr. Chlebus
 
 This course is being taken in the Fall of 2020. I will be dumping my notes and other related items towards this course. The textbook for this can be found in the link below. 
 
