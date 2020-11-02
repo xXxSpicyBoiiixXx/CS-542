@@ -1,0 +1,280 @@
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+\title{Homework 1}
+\author{Md Ali \& Samantha Berg\\ 
+CS 542: Computer Network Fundamentals I} 
+ 
+\maketitle
+ 
+\begin{exercise}{1}
+What is the range of address of the 100th block of Class A?
+\end{exercise} 
+
+\begin{proof}
+ Now, assuming that the 100th block of Class A is the IP address 100.0.0.0, we will note a few things before coming to the conclusion of the ranges of addresses. We can confirm that this is class A as the first byte is between 0 and 127. The block also has a netid of 100, this leads us to the conclusion that the range of addresses are 100.0.0.0 to 100.255.255.255. To add, this is literally millions of addresses that are most likely wasted as a result of the massive amount of addresses. 
+\end{proof}
+ 
+\begin{exercise}{2}
+What are the network address, net id, and host id for the IP address 172.168.5.4? (Assuming classful addressing)
+\end{exercise}
+ 
+\begin{proof}
+The network address or block is class B due to the first byte is between 128 and 191. So in turn we know that class B has a default mask of /16 which makes our network address 172.168.0.0. In regards to the netid, as this is class B, we will take into account the first two bytes, hence the netid is 172.168. As a result this leaves us with the hostid for the last two bytes which are 5.4. It is important to note that there is still a lot of addresses wasted in class B as well. 
+\end{proof}
+
+\begin{exercise}{3}
+Convert the number ADBC91E0 in the hexadecimal base to the 256-base system directly. Do not convert these number into the binary or decimal system.
+\end{exercise}
+
+\begin{proof}
+Assuming that the 256-base system is the IP format and not the mathematical 256-base. Taking each component of the hexadecimal ADBC91E0, we see that \\ \\
+$AD_{16} = 10 \cdot 16^{1} + 13 \cdot 16^{0} = 173$ \\
+$BC_{16} = 11 \cdot 16^{1} + 12 \cdot 16^{0} = 188$ \\
+$91_{16} = 9 \cdot 16^{1} + 1 \cdot 16^{0} = 145$ \\ 
+$E0_{16} = 14 \cdot 16^{1} + 0 \cdot 16^{0} = 224$ \\ \\ 
+Hence our 256-base or IP is 173.188.145.224
+\end{proof}
+ 
+\begin{exercise}{4}
+Subtract the number 254.193.47.26 from 192.34.29.255. Give the result in the 256-base system. Do not convert these numbers into the binary or decimal, or hexadecimal system. 
+\end{exercise}
+
+\begin{proof}
+You can do this directly but make sure it is the absolute value as well. This is shown in the below, and be caution as this is base 256. \\ \\
+$[254 - 192 = 62]_{256}$ \\
+$[193 - 34 = 159]_{256}$ \\  
+$[47 - 29 = 17]_{256}$ \\ 
+$[26 - 255 = 27]_{256}$ \\ \\
+Taking all this, we get our resulting IP address or 256-base system number to be 62.159.17.27
+\end{proof}
+
+\begin{exercise}{5}
+What is the 199th address in the $2^{20}$ block of Class C?
+\end{exercise}
+
+\begin{proof}
+The first octet would be 199 and can be confirmed as class C as it is in between 192 and 223, from there we can $2^{20}$ to our 256-base system. Since we can take off the 3rd and 4th octets like below.  \\ \\
+$2^{20} - 2^{16} = 2^{4}$ \\ \\ 
+From there we can compute our 2nd octet which would be below. \\ 
+$2^{4} = 16$ \\ \\
+Hence 199th address in the $2^{20}$ block will be 199.16.0.0
+\end{proof}
+
+\begin{exercise}{6}
+Consider the following routing table (the next-hop address is omitted): \\
+
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+ Mask & Network Address & Interface \\ 
+ \hline 
+ /27 & 155.232.55.0 & M0 \\
+ \hline 
+ /26 & 132.176.97.0 & M1 \\
+ \hline 
+ /25 & 132.176.97.128 & M2 \\
+ \hline 
+ /24 & 198.104.162.0 & M3 \\ 
+ \hline 
+ Default & Default & M4 \\
+ \hline
+\end{tabular}
+\end{center}
+Give the interface number for a packet whose destination IP address is: \\ \\
+a. 132.176.97.173 \\
+b. 132.176.97.32 \\
+c. 155.232.55.192 \\
+d. 155.232.55.27 \\
+e. 198.104.162.128 \\
+f. 198.104.161.192 \\
+g. 132.176.97.120
+\end{exercise}
+
+\begin{proof}
+For this we will be converting the given table into a range of IP address by looking at the corresponding mask and then making a range looking at the binary numbers. Below is a table with the ranges of IP addresses that will be in each interface, if an IP is not in the range then it will be going through the interface M4 as default. \\ 
+\begin{center}
+\begin{tabular}{ |c|c| } 
+ \hline
+ Network Range & Interface \\ 
+ \hline 
+ 155.232.55.0 - 155.232.55.31 & M0 \\
+ \hline 
+ 132.176.97.0 - 132.176.97.63 & M1 \\
+ \hline 
+ 132.176.97.128 - 132.176.97.255 & M2 \\
+ \hline 
+ 198.104.162.0 - 198.104.162.255 & M3 \\ 
+ \hline 
+ Default & M4 \\
+ \hline
+\end{tabular}
+\end{center}
+\\ \\
+a. 132.176.97.173 - Interface: M2\\
+b. 132.176.97.32 - Interface: M1\\
+c. 155.232.55.192 - Interface: M4\\
+d. 155.232.55.27 - Interface: M0 \\
+e. 198.104.162.128 - Interface: M3\\
+f. 198.104.161.192 - Interface: M4\\
+g. 132.176.97.120 - Interface: M2
+\end{proof}
+
+\begin{exercise}{7}
+Give the mask in the dotted-decimal notation: \\ \\
+a. For a block of Class A which results in 32 subnets \\ 
+b. Which combines 2048 Class C blocks into a supernet \\ 
+c. For a block of Class B which results in 64 subnets \\ 
+d. Which combines 16 Class B blocks into a supernet 
+\end{exercise}
+
+\begin{proof}
+We are asked to give a corresponding mask in dotted-decimal form. \\ \\
+a. We are given a block of Class A and need 32 subnets. Here we know that Class A's default mask is /8, meaning that we need to find the corresponding mask that will give us 32 equally defined subnets. Below we get the number of hosts that are in Class A. 
+\\ \\ 
+$256^{3} = 16777216$ hosts
+\\ \\ Then we must dived this number by the number of subnets we desire to get how many hosts will be in each subnet \\ \\
+$\dfrac{16777216}{32} = 524288$ hosts per subnet
+\\ \\
+From here we can use the formula below where $h$ is for number of hosts and $x$ is the corresponding subnet. \\ \\
+$h = 2^{32 - x}$ 
+\\ \\
+Now we just plug in our numbers and you will need a calculator to find the logarithmic or be able to recognize what the exponent was for this massive number. \\ \\
+$524288 = 2^{32-x} \rightarrow log_{2}(524288) = 32 - x \rightarrow 19 - 32 = - x \rightarrow x = 13$ \\ \\
+Hence as shown above, the proper subnet will be /13 or in dotted-decimal format 255.248.0.0 \\ \\
+b. For a class C block, the default mask is /24. So in each subnet we have 256 hosts, from here we want to combine 2048 of these hosts into a supernet. As before, we can find the total amount of hosts as below. \\ \\
+$2048 \cdot 256 = 524288$ total hosts \\ \\
+We already know what the proper mask to implement for this many hosts from part a but to reiterate the formula we use to find the proper submask is below \\ \\ 
+$h = 2^{32 -x} \rightarrow 52488 = 2^{32 - x} \rightarrow x = 13$ \\ \\ 
+Hence the proper subnet to create this supernet is /13 or in dotted-decimal format 255.248.0.0 \\ \\
+c. We are ask to take a class B, that has a default mask of /16, and create 64 subnets. We will follow the same approach as part a of this problem. \\ \\
+$256^{2} = 65536 \rightarrow \dfrac{65536}{64} = 1024$ hosts per subnet \\ \\ 
+$1024 = 2^{32 - x} \rightarrow x = 22$ \\ \\ 
+Hence from above, we can see that the appropriate submask is 22 which in dotted-decimal format is 255.255.252.0 \\ \\ 
+d. Here we are asked to combine 16 class B blocks into a supernet. So in essence, so in term we will have to find the total number of hosts we are dealing with here as we have done below. \\ \\
+$256^{2} \cdot 16 = 1048576$ total hosts \\ \\
+$1048576 = 2^{32 - x} \rightarrow x = 12$ \\ \\
+Hence from above, we can see that the appropriate submask to create this supernet is 12 which in dotted-decimal format is 255.240.0.0
+\end{proof}
+
+\begin{exercise}{8}
+Find the network address, the direct broadcast address, and the number of addresses in a block; if one of the addresses in this block is 175.120.240.17/19
+\end{exercise}
+
+\begin{proof}
+So the submask is /19 which gives the network address of 175.120.224.0. From here if we convert this number into binary, we will then need to change the last 13 bytes into 1 instead of 0 which will lead us to the broadcast address of 175.120.255.255. From here we can just subtract 256 from the 224 of the network address and then multiple that number by 256 to get how many addresses are in each block as shown below.\\ \\
+$[(256 - 224) * 256] = 8196$ address per block
+\end{proof}
+
+\begin{exercise}{9}
+Convert the decimal number 1819111023.439246416091794 to the base 256 system. Show all the intermediate steps. Don't miss a decimal point in this number. 
+\end{exercise}
+
+\begin{proof}
+We will break this up into to separate items regarding with the decimal point. 
+\\
+So looking at the number of the left of the decimal point, 1819111023. We must follow a process of dividing this by 256 and then the remainder of that number will be the base 256 system number. This can be seen below. \\ \\
+$\dfrac{1819111023}{256} = 7105902.43359 \rightarrow 7105902 \cdot 256 = 1819110912$ \\ \\
+$1819111023 - 1819110912 = 111$ \\ \\
+Hence our first octet from the left of the decimal place will be 111. \\ \\ 
+Now we take the value that we got from dividing 256, which is 7105902 and repeat the process. \\ \\
+$\dfrac{7105902}{256} = 27757.4296875 \rightarrow 27757 \cdot 256 = 7105792$ \\ \\ 
+$7105902 - 7105792 = 110$ \\ \\
+Hence our second octet from the left of the decimal place will be 110. \\ \\ 
+$\dfrac{27757}{256} = 108.42578125 \rightarrow 108 \cdot 256 = 27648$ \\ \\
+$27757 - 27648 = 109$ \\ \\
+Hence our third octet from the the left of the decimal place will be 109. Now notice our number now 108 is less than 256, so this makes our final octet from the left of the decimal place 108. In conclusion our base 256 number from the left of the decimal place is 108.109.110.110. Now we will look at the numbers to the right of the decimal place. \\ \\ 
+So the number to right of the decimal point is .439246416091794. Now since this is left to decimal point we will have to do the exact opposite of the previous process, where we will multiple by 256. To note a few things here is that we will go out to 15 decimal places for our calculations and you can go on a continuous loop to constantly get new numbers, but for the purposes of the 256 base notation, we will only have the first four octets. The multiplication can be seen below. \\ \\
+$.439246416091794 \cdot 256 = 112.447082519499264$ \\
+Here we see our first octet from the right of the decimal point, which is 112, from here we will take the remaining numbers from the decimal point from the result and do the same process, which can be seen below. \\ \\
+$.447082519499264 \cdot 256 = 114.453124991811584$ \\ \\ 
+Now we can see the second octet from the right of the decimal point, which is 114, from here will we will do the same process. \\ \\ 
+$.453124991811584 \cdot 256 = 115.999997903765504$ \\ \\ 
+Here our third octet from the right of the decimal point is 155. \\ \\ 
+$.999997903765504 \cdot 256 = 255.999463363969024$ \\ \\ 
+Here our last octet is 255. In conclusion our 256 base notation from the left of the decimal point will be 112.114.115.255. \\ \\ 
+Our final answer will be 108.109.110.111 : 112.114.115.255
+\end{proof}
+
+\begin{exercise}{10}
+The 49th address of a block assigned to a specific organization is 185.175.79.48. The organization needs a total of 128 addresses. Find the mask and define this block of addresses. Is there any wastage of the IP addresses? If yes, how many? 
+\end{exercise}
+
+\begin{proof}
+Since the address is the 49th in this particular block we can put the netid at 185.175.79.0. From here we can see that the mask is /24. Since this is one particular block we can have the range of IP address from 185.175.79.0 - 185.175.79.255, this makes the total addresses to be 256. \\ \\ 
+So in conclusion, the mask is /24, and yes there is a 128 IP addresses that are being wasted. 
+\end{proof}
+
+\begin{exercise}{11}
+An organization is granted the block 178.49.240.0/20. The administrator wants to create 128 subnets. Find the following. \\ \\
+a. The subnet mask (give value in /n notation) \\ 
+b. The number of addresses in each subnet \\ c. Subnet address of the 100th subnet
+\end{exercise}
+
+\begin{proof}
+
+a) Here we are asked to give the subnet mask. We see that we are given a default mask of /20, meaning our netid address is 178.49.240.0 - 178.49.255.255. Since we only want 128 subnets there is many ways to achieve this but we will try to maximize our potential. Hence, we will stick with the subnet mask to be equal to original mask of /20. \\ \\
+b) Now for the number of addresses in each subnet, now we know our subnet mask is /20 meaning that our last IP address should be 178.49.255.255. Taking this into account we can do the mathematical operation below to see how many addresses they are in total. \\ \\
+$2^4 \cdot 2^8 = 2^12 = 4096$ addresses \\ \\
+From there we can divide by the number of subnets we have to achieve how many addresses are in each subnet as shown below. \\ \\ 
+$\dfrac{4096}{128} = 32$ \\ \\ 
+Hence in each subnet, there are 32 addresses. \\ \\ 
+c) Since each third octet has their own 8 subnets as well we can divide 8 by 100 and get 12.5 as the decimal. Since there is 8 different subnets in each other subnet we should add 12 to the third octet. This gives up 172.49.252.0, but we need to know the extra 0.5 that came from our calculations. Since this is 0.5, we multiple this number by 256 and get 128. So in conclusion, the 100th subnet's address is 172.49.252.128. 
+\end{proof}
+
+\begin{exercise}{12}
+An Internet Service Provider (ISP) has the following block of IP address 192.37.128.0/17. The ISP gave the first 1024 addresses to Organization A and the next available subblock of 16384 addresses to Organization B and retained the remaining IP addresses. Give the subblocks and the valid range of addresses allocated to organization A \& B and the range of remaining addresses. 
+\end{exercise}
+
+\begin{proof}
+We must look at the masking of the IP address where 192.37.128.0/17 network address is in fact 192.37.128.0. From here, we are tasked with giving the first 1024 addresses to Organization A. So reading from left to right we must give the full range of 0 to 255 for the last octet four times to get the 1024 address. This makes the Organization A the IP ranges of 192.37.128.0 - 192.37.132.255, meaning there are four separate blocks for Organization A. \\ \\ 
+Now looking at Organization B's needs, we will need 16384 addresses. Using the same method above but picking up from 192.37.133.0, we can see that we will need the full fourth octet, from there we divide 16384 by 256 to see how much more we need to raise the third octet. $\dfrac{16384}{256} = 64$. So knowing this, we can see that we have 64 blocks in Organization B and B has the IP ranges of 192.37.133.0 - 192.37.197.255. \\ \\ This leaves us with the rest of the free space that we have left for this particular network, which is 192.37.198.0-192.37.255.255, which is 16128 addresses. \\ \\ 
+In conclusion: \\
+Organization A has 4 subblocks with the IP ranges of 192.37.128.0 - 192.37.132.255. \\ 
+Organization B has 64 subblocks with the IP ranges of 192.37.133.0 - 192.37.197.255 \\ 
+The rest of the IP ranges that are not used are 192.37.198.0 - 192.37.255.255
+\end{proof}
+
+\begin{exercise}{13} 
+Consider the network configuration below. A packet arrived at the router R3 with the destination address 170.14.7.47. Show how it is forwarded. (Assume classful addressing). Create a routing table for router R3.
+\end{exercise}
+
+\begin{proof}
+The packet that arrived at router R3 with the destination address 170.14.7.47 will first be evaluated by the router in binary and shift a copy of the IP 28 bits to the left to the right to get the class of the IP, which in this case is class B. From there, the default mask for class B is /16 which is applied to the network, making the netid to be 170.14.0.0. The routing table will search for Class B, and this is found on an indirect route to R1 hence the next hop address is 111.25.19.20 and the interface that is pass is M1. \\ \\ 
+Below is a routing table for router 3. \\
+\begin{center}
+\begin{tabular}{ |c|c|c|c| } 
+ \hline
+ Mask & Network Address & Next Hop & Interface \\ 
+ \hline 
+ /24 & 192.16.7.0 & N/A & M0\\
+ \hline 
+ /8 & 110.0.0.0 & 110.25.19.20 & M1\\
+ \hline 
+ default & 110.0.0.0 & 110.30.31.18 & M1 \\
+ \hline
+\end{tabular}
+\end{center}
+\end{proof}
+
+\end{document}
